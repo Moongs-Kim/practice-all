@@ -1,0 +1,72 @@
+[git 도움말과 설정]
+
+<도움말>
+git help : 깃 명령어와 그에 대한 간략한 설명
+git help -a : 깃의 모든 명령어 보기
+
+git 명령어 -h : 명령어에 대한 도움말 확인
+git 명령어 --help : 명령어에 대한 도움말 확인
+
+<깃 문서 참고>
+https://git-scm.com/docs
+
+<설정>
+git config --global user.name 유저명 : 글로벌로 유저명 설정
+git config --global user.email 이메일 : 글로벌로 이메일 설정
+
+git config --global user.name : 설정된 글로벌 유저명 확인
+git config --global user.email : 설정된 글로벌 이메일 확인
+
+git config user.name 유저명 : 어떤 프로젝트에만 이 유저명 적용(글로벌로 지정 안함)
+git config user.email 이메일 : 어떤 프로젝트에만 이 이메일 적용(글로벌로 지정 안함)
+
+--확인--
+git config --list : 현재 프로젝트의 설정된 값들을 모두 확인
+git config --global --list : 글로벌로 설정된것만 확인
+
+git config -e : 지정된 에디터로 설정값 확인
+git config --global -e : 지정된 에디터로 글로벌 설정값만 확인
+
+git config --global core.editor "에디터명 --wait"
+지정한 에디터로 열리고 기대리게 하는것(vim으로 열리지 않음)
+에디터명에 편집 프로그램의 .exe 파일 경로를 작성해도됨
+
+--줄바꿈 호환 문제--
+윈도우
+git config --global core.autocrlf true
+
+맥
+git config --global core.autocrlf input
+
+--pull 명령의 기본값 설정--
+git config pull.rebase false : 머지가 기본값(--no-rebase)
+git config pull.rebase true : 리베이스가 기본값(--rebase)
+
+--기본 브랜치 이름 지정--
+git config --global init.defaultBranch main
+
+--푸시할 때 로컬과 동일한 브랜치 이름 적용--
+git config --global push.default current
+무조건 로컬의 브랜치에 따라서 원격 저장소의 동일한 이름을 가진 브랜치에 푸시 하도록 설정
+예외 사항이 있다면 그때만 명시적으로 지정하면됨
+
+--단축키 설정--
+git config --global alias.단축키 "명령어"
+ex) git config --global alias.cam "commit -am"
+
+<기타>
+git --version : 깃버전확인 및 깃 설치 유무 확인
+
+git init
+- 깃이 폴더를 관리할 수 있게 만드는 명령어(.git 폴더가 숨김으로 만들어짐)
+- .git 폴더는 깃이 관리하는 프로젝트 내역이 들어간다
+- .git 폴더를 삭제하면 깃 관리 내역이 모두 사라진다(주의)
+
+.gitignore 파일
+깃의 관리 대상에서 배제해야할 파일 지정
+1. 굳이 프로젝트 관리 대상에 포함할 필요가 없는 파일(자동 생성 및 다운로드)
+2. 보안상 민감한 정보
+
+사용법 .gitignore 파일에 무시할 파일 명을 작성하면 된다
+꼭 파일의 풀 네임이 아니라 어떤 형식으로 작성해도 된다.
+참고 : https://git-scm.com/docs/gitignore
