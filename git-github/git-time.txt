@@ -1,0 +1,22 @@
+[git 시간여행 명령어]
+
+git add (파일명) : 특정 파일만 스테이지 영역으로 전환
+git add . : 변경한 파일 전부 스테이지 영역으로 전환
+
+git commit : vim에서 커밋 메세지 작성 후 저장소로 전환
+git commit -m '커밋 메세지': 커밋과 동시에 커밋 메세지 작성
+git commit -m '커밋 메세지' -m '커밋 메세지' : 커밋 메세지가 두 줄일때 사용
+git commit -am '커밋 메세지' : add 와 commit 명령을 한번에 적용
+    -> 이 명령을 사용하기 위해서는 untracked 파일이 없어야함
+
+<과거로 돌아가는 명령어>
+git reset --hard 해당 시점의 커밋 해시값 : 해당 시점까지 커밋 내역을 전부 지움
+git revert 취소할 커밋의 해시값 : 작업을 반대로 수행
+* 공유된 커밋은 revert를 사용해서 되돌려야 심각한 충돌이 발생 안함
+git revert --continue : 충돌시 충돌 해결 후 revert 지속
+git revert --no-commit 커밋 해시값: 리버트 후 커밋은 안함 -> 다른 변경 사항까지 더한 후 커밋할때 사용
+
+
+<번외>
+git status : 깃의 상태를 확인
+git log : 커밋 메세지 및 커밋 해쉬 등 확인 가능
