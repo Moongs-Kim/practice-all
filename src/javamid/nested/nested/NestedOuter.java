@@ -27,4 +27,12 @@ public class NestedOuter {
             System.out.println("static method 선언 가능");
         }
     }
+
+    //중첩 인터페이스 테스트
+
+    // 1. 인스턴스 멤버 인터페이스 -> 가능
+    interface InstanceInterface {}
+
+    // 2. 정적 멤버 인터페이스 -> 가능
+    static interface ClassInterface {}
 }
