@@ -10,7 +10,7 @@ public class MainV0 {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("전송할 문자: ");
-            String input scanner.nextLine();
+            String input = scanner.nextLine();
             if (input.equals("exit")) {
                 break;
             }
