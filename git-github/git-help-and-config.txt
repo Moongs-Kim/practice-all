@@ -28,7 +28,7 @@ git config -e : 지정된 에디터로 설정값 확인
 git config --global -e : 지정된 에디터로 글로벌 설정값만 확인
 
 git config --global core.editor "에디터명 --wait"
-지정한 에디터로 열리고 기대리게 하는것(vim으로 열리지 않음)
+지정한 에디터로 열리고 기다리게 하는것(vim으로 열리지 않음)
 에디터명에 편집 프로그램의 .exe 파일 경로를 작성해도됨
 
 --줄바꿈 호환 문제--

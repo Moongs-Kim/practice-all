@@ -1,16 +1,16 @@
-[git fast foward vs 3-way-merge]
+[git fast forward vs 3-way-merge]
 
-<fast foward>
+<fast forward>
 상황 : main 브랜치의 마지막 커밋에서 하나의 브랜치가 생성되어 1개 이상의 커밋이 있다.
 
 이 상황에서 main 브랜치에서 새로운 브랜치를 커밋하면 main 브랜치는 굳이 새로운 커밋을 만들 필요 없이
 새 브랜치의 최신 커밋으로 헤드를 이동하면된다.
 * rebase를 통해 재배치를 진행한 후 다시 merge를 통해 헤드를 옮기는 과정이 사실은 fast forward인 것이다.
 
-이게 fast foward이다.
+이게 fast forward이다.
 
-하지만 fast foward의 단점은 어떤 브랜치를 사용했고 언제 병합했는지 '기록이 남지 않는다'는 것이다.
-fast foward 하지 않고 커밋을 만들어 병합 하려면
+하지만 fast forward의 단점은 어떤 브랜치를 사용했고 언제 병합했는지 '기록이 남지 않는다'는 것이다.
+fast forward 하지 않고 커밋을 만들어 병합 하려면
 
 git merge --no-ff 병합할 브랜치 명
 
