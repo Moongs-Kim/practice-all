@@ -159,6 +159,19 @@ static void printWildcardV1(Box<?> box) {
 제네릭 타입은 타입 추론을 거쳐야 하지만
 와일드카드는 이미 타입이 확정된 객체를 매개변수로 받는거 같다.
 
+※참고
+Node<E> getLastNode() 이건 제네릭 메서드가 아니다
+그냥 제네릭 타입을 반환하는 일반 메서드이다.
+
+제네릭 메서드는 <E> E getLastNode() -> 이렇게 <E> 표시가 있어야하고
+이는 메서드 호출시 타입이 결정된다.
+
+그리고 void setNode(Node<E> node) 라고 선언된 메서드가 있을 때
+Node node = new Node() -> raw type 클래스
+set Node(node) -> 이렇게 raw type을 입력해도 컴파일 오류는 없다
+다만 타입 추론에 의해 raw type을 Node<Object>로 생각한다.
+그리고 경고가 나타난다.
+
 2. 상한 와일드카드
 - 제네릭 메서드와 마찬가지로 와일드카드에도 상한 제한을 둘 수 있다.
   ex) ? extends Animal
