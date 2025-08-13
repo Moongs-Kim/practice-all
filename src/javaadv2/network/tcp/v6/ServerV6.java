@@ -26,7 +26,7 @@ public class ServerV6 {
                 Socket socket = serverSocket.accept();
                 log("소캣 연결: " + socket);
 
-                SessionV5 session = new SessionV5(socket);
+                SessionV6 session = new SessionV6(socket, sessionManager);
                 Thread thread = new Thread(session);
                 thread.start();
             }
