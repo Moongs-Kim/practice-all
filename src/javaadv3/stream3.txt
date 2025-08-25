@@ -1,0 +1,51 @@
+[스트림 API]
+
+<컬렉터>
+스트림이 중간 연산을 거쳐 최종 연산으로써 데이터를 처리할 때, 그 결과물이 필요한 경우가 많다.
+대표적으로 리스트나 맵 같은 자료 구조에 담고 싶다거나 통계 데이터를 내고 싶다는 식의 요구가 있을 때,
+이 최종 연산에 Collectors를 활용한다.
+
+collect 연산(예: stream.collect(...))은 반환값을 만들어내는 최종 연산이다.
+collect(Collector<? super T, A, R> collector) 형태를 주로 사용하고, Collectors 클래스 안에 준비된
+여러 메서드를 통해서 다양한 수집 방식을 적용할 수 있다.
+
+※참고
+필요한 대부분의 기능이 Collectors에 이미 구현되어 있기 때문에, Collector 인터페이스를 직접 구현하는 것보다는
+Collectors의 사용법을 익히는 것이 중요하다.
+
+<다운 스트림 컬렉터>
+== 다운 스트림 컬렉터가 필요한 이유 ==
+- groupingBy(...)를 사용하면 일단 요소가 그룹별로 묶이지만, 그룹 내 요소를 구체적으로 어떻게 처리할지는
+  기본적으로 toList()만 적용된다.
+- 그런데 실무에서는 '그룹별 총합, 평균, 최대/최소, 매핑된 결과, 통계' 등을 바로 얻고 싶을 때가 많다.
+- 그룹화된 이후 각 그룹 내부에서 추가적인 연산 또는 결과물(예: 평균, 합계, 최댓값, 최솟값, 통계, 다른 타입으로 변환 등)을
+  정의하는 역할을 하는 것이 바로 다운 스트림 컬렉터(Downstream Collector)이다.
+- 이때 다운 스트림 컬렉터를 활용하면 그룹 내부를 다시 한번 모으거나 집계하여 원하는 결과를 얻을 수 있다.
+예: groupingBy(분류함수, counting()) → 그룹별 개수
+예: groupingBy(분류함수, summingInt(Student::getScore))  → 그룹별 점수 합계
+예: groupingBy(분류함수, mapping(Student::getName, toList())) → 그룹별 학생 이름 리스트
+
+== 다운 스트림 컬렉터란 ==
+- Collectors.groupingBy(...) 또는 Collectors.partitioningBy(...) 에서 두 번째 인자로 전달되는
+  Collector를 가리켜 다운 스트림 컬렉터라 한다.
+- 예를 들어 Collectors.groupingBy(classifier, downstreamCollector) 형태로 사용될 때,
+  downstreamCollector는 classifier에 의해 분류된 각 그룹 내부의 요소들을 다시 한 번 어떻게 처리할지를
+  정의하는 역할을 한다.
+- 예를 들어 학년 별로 그룹화 한다면, 그룹화한 각 학년별 요소들을 다시 한 번 어떻게 처리할지 정의하는 것이다.
+// 예시
+Map<KeyType, DownstreamResult> result =
+    stream.collect(Collectors.groupingBy(
+        element -> // 분류 기준 Key,  // 1) groupingBy용 분류 함수
+        downstreamCollector         // 2) 그룹 내부를 처리할 다운 스트림 컬렉터
+    ));
+
+- 만약 다운 스트림 컬렉터를 명시하지 않으면, 기본적으로 Collectors.toList()가 적용되어서 그룹별 요소들을
+  List로 모은다.
+- 그러나 그룹별 개수를 세거나, 평균을 구하거나, 특정 필드를 뽑아서 맵핑하거나 등등의 작업이 필요하다면,
+  적절한 다운 스트림 컬렉터를 추가로 지정해야 한다.
+- 다운 스트림 컬렉터는 그룹화(또는 분할)를 먼저 한 뒤, 각 그룹(또는 파티션) 내부의 요소들을 어떻게 처리할 것인가?
+  를 지정하는 데 사용된다.
+
+
+
+
