@@ -45,4 +45,9 @@ public class MyStreamV3<T> {
             consumer.accept(element);
         }
     }
+
+    //추가
+    public T getFirst() {
+        return internalList.get(0);
+    }
 }
